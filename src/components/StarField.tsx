@@ -66,14 +66,14 @@ const StarField = () => {
       {stars.map(star => (
         <div
           key={star.id}
-          className="absolute rounded-full bg-white"
+          className="absolute rounded-full bg-blue-200"
           style={{
             left: `${star.x}px`,
             top: `${star.y}px`,
             width: `${star.size}px`,
             height: `${star.size}px`,
             opacity: star.opacity,
-            boxShadow: `0 0 ${star.size * 2}px rgba(255, 255, 255, ${star.opacity * 0.5})`,
+            boxShadow: `0 0 ${star.size * 2}px rgba(147, 197, 253, ${star.opacity * 0.5})`,
           }}
         />
       ))}

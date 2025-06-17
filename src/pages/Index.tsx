@@ -11,7 +11,7 @@ const Index = () => {
   const [activeTab, setActiveTab] = useState('proxy');
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex flex-col relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900 flex flex-col relative overflow-hidden">
       <StarField />
       
       <div className="relative z-10 flex flex-col min-h-screen">

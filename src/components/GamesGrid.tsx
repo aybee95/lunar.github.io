@@ -93,18 +93,18 @@ const GamesGrid = () => {
     <div className="w-full max-w-6xl mx-auto p-6">
       <div className="text-center mb-8">
         <div className="flex items-center justify-center space-x-2 mb-4">
-          <Gamepad2 className="text-white" size={32} />
-          <h2 className="text-3xl font-bold text-white">Game Center</h2>
+          <Gamepad2 className="text-blue-200" size={32} />
+          <h2 className="text-3xl font-bold text-blue-100">Game Center</h2>
         </div>
-        <p className="text-gray-300">
+        <p className="text-blue-200">
           Play your favorite unblocked games directly in your browser
         </p>
       </div>
 
       {categories.map(category => (
         <div key={category} className="mb-8">
-          <h3 className="text-xl font-semibold text-white mb-4 flex items-center">
-            <span className="w-2 h-2 bg-white rounded-full mr-3"></span>
+          <h3 className="text-xl font-semibold text-blue-100 mb-4 flex items-center">
+            <span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>
             {category} Games
           </h3>
           
@@ -114,18 +114,18 @@ const GamesGrid = () => {
               .map((game, index) => (
                 <div
                   key={index}
-                  className="backdrop-blur-sm bg-white/5 rounded-xl border border-white/10 p-4 hover:bg-white/10 transition-all duration-200 group hover:border-white/50"
+                  className="backdrop-blur-sm bg-blue-900/20 rounded-xl border border-blue-400/30 p-4 hover:bg-blue-800/30 transition-all duration-200 group hover:border-blue-400/50"
                 >
                   <div className="flex flex-col h-full">
-                    <h4 className="font-semibold text-white mb-2 group-hover:text-gray-200 transition-colors">
+                    <h4 className="font-semibold text-blue-100 mb-2 group-hover:text-blue-50 transition-colors">
                       {game.title}
                     </h4>
-                    <p className="text-sm text-gray-400 mb-4 flex-grow">
+                    <p className="text-sm text-blue-300 mb-4 flex-grow">
                       {game.description}
                     </p>
                     <Button
                       onClick={() => handleGameClick(game)}
-                      className="w-full bg-gradient-to-r from-white/20 to-gray-200/20 hover:from-white/40 hover:to-gray-200/40 border border-white/30 text-white hover:text-gray-200 transition-all duration-200"
+                      className="w-full bg-gradient-to-r from-blue-500/40 to-purple-600/40 hover:from-blue-500/60 hover:to-purple-600/60 border border-blue-400/40 text-blue-100 hover:text-white transition-all duration-200"
                       variant="outline"
                     >
                       <Play size={16} className="mr-2" />

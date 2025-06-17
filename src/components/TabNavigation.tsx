@@ -17,7 +17,7 @@ const TabNavigation = ({ activeTab, onTabChange }: TabNavigationProps) => {
             onClick={() => onTabChange('proxy')}
             className={`px-6 py-3 rounded-full transition-all duration-200 ${
               activeTab === 'proxy'
-                ? 'bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-lg'
+                ? 'bg-gradient-to-r from-white to-gray-200 text-black shadow-lg'
                 : 'text-gray-300 hover:text-white hover:bg-white/10'
             }`}
             variant="ghost"
@@ -29,7 +29,7 @@ const TabNavigation = ({ activeTab, onTabChange }: TabNavigationProps) => {
             onClick={() => onTabChange('games')}
             className={`px-6 py-3 rounded-full transition-all duration-200 ${
               activeTab === 'games'
-                ? 'bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-lg'
+                ? 'bg-gradient-to-r from-white to-gray-200 text-black shadow-lg'
                 : 'text-gray-300 hover:text-white hover:bg-white/10'
             }`}
             variant="ghost"

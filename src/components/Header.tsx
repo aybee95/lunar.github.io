@@ -9,7 +9,7 @@ const Header = () => {
           <div className="relative">
             <Moon 
               size={36} 
-              className="text-cyan-400 filter drop-shadow-[0_0_10px_rgba(34,211,238,0.7)]"
+              className="text-white filter drop-shadow-[0_0_10px_rgba(255,255,255,0.7)]"
               fill="none"
               stroke="currentColor"
             />

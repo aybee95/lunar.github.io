@@ -56,13 +56,13 @@ const ProxyInput = () => {
               placeholder="Enter website URL (e.g., youtube.com)"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
-              className="pl-12 h-14 bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus:border-cyan-400 focus:ring-cyan-400/20"
+              className="pl-12 h-14 bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus:border-white focus:ring-white/20"
             />
           </div>
           
           <Button 
             type="submit"
-            className="w-full h-14 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-semibold transition-all duration-200 shadow-lg hover:shadow-cyan-500/25"
+            className="w-full h-14 bg-gradient-to-r from-white to-gray-200 hover:from-gray-100 hover:to-gray-300 text-black font-semibold transition-all duration-200 shadow-lg hover:shadow-white/25"
           >
             Connect Through Proxy
             <ArrowRight className="ml-2" size={20} />

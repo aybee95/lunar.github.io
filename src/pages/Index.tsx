@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import TabNavigation from "@/components/TabNavigation";
 import ProxyInput from "@/components/ProxyInput";
@@ -9,12 +9,23 @@ import SettingsBar from "@/components/SettingsBar";
 import Footer from "@/components/Footer";
 import StarField from "@/components/StarField";
 import EmbeddedBrowser from "@/components/EmbeddedBrowser";
+import LoadingScreen from "@/components/LoadingScreen";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('proxy');
   const [theme, setTheme] = useState('cosmic');
   const [showSettings, setShowSettings] = useState(false);
   const [embeddedBrowser, setEmbeddedBrowser] = useState<{url: string, title: string} | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Show loading screen for 3 seconds
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleOpenEmbedded = (url: string, title: string) => {
     setEmbeddedBrowser({ url, title });
@@ -44,6 +55,10 @@ const Index = () => {
         );
     }
   };
+
+  if (isLoading) {
+    return <LoadingScreen theme={theme} />;
+  }
 
   if (embeddedBrowser) {
     return (

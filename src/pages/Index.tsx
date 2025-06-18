@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import StarField from "@/components/StarField";
 import EmbeddedBrowser from "@/components/EmbeddedBrowser";
 import LoadingScreen from "@/components/LoadingScreen";
+import StartupScreen from "@/components/StartupScreen";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('proxy');
@@ -17,15 +18,22 @@ const Index = () => {
   const [showSettings, setShowSettings] = useState(false);
   const [embeddedBrowser, setEmbeddedBrowser] = useState<{url: string, title: string} | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [showStartup, setShowStartup] = useState(true);
 
   useEffect(() => {
-    // Show loading screen for 3 seconds
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
+    // Show loading screen for 3 seconds after password is entered
+    if (!showStartup) {
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 3000);
 
-    return () => clearTimeout(timer);
-  }, []);
+      return () => clearTimeout(timer);
+    }
+  }, [showStartup]);
+
+  const handleStartupSuccess = () => {
+    setShowStartup(false);
+  };
 
   const handleOpenEmbedded = (url: string, title: string) => {
     setEmbeddedBrowser({ url, title });
@@ -55,6 +63,10 @@ const Index = () => {
         );
     }
   };
+
+  if (showStartup) {
+    return <StartupScreen theme={theme} onSuccess={handleStartupSuccess} />;
+  }
 
   if (isLoading) {
     return <LoadingScreen theme={theme} />;

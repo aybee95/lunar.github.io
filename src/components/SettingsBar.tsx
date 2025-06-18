@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { Settings, Palette, X } from "lucide-react";
+import { Settings, X } from "lucide-react";
 
 interface SettingsBarProps {
   theme: string;
@@ -14,31 +14,31 @@ const SettingsBar = ({ theme, onThemeChange, isOpen, onToggle }: SettingsBarProp
     switch (theme) {
       case 'cosmic':
         return {
-          container: 'backdrop-blur-sm bg-blue-900/20 border-blue-400/30',
-          text: 'text-blue-100',
-          button: 'text-blue-200 hover:text-white hover:bg-blue-500/20',
-          activeButton: 'bg-gradient-to-r from-blue-500 to-purple-600 text-white'
+          container: 'backdrop-blur-sm bg-blue-900/90 border-blue-400/30',
+          button: 'bg-blue-600/60 hover:bg-blue-500/60 text-blue-100',
+          activeButton: 'bg-blue-500 text-white',
+          text: 'text-blue-100'
         };
       case 'dark':
         return {
-          container: 'backdrop-blur-sm bg-gray-800/20 border-gray-600/30',
-          text: 'text-gray-100',
-          button: 'text-gray-200 hover:text-white hover:bg-gray-600/20',
-          activeButton: 'bg-gradient-to-r from-gray-600 to-gray-800 text-white'
+          container: 'backdrop-blur-sm bg-gray-800/90 border-gray-600/30',
+          button: 'bg-gray-600/60 hover:bg-gray-500/60 text-gray-100',
+          activeButton: 'bg-gray-500 text-white',
+          text: 'text-gray-100'
         };
       case 'light':
         return {
-          container: 'backdrop-blur-sm bg-white/20 border-gray-300/30',
-          text: 'text-gray-800',
-          button: 'text-gray-700 hover:text-black hover:bg-gray-200/20',
-          activeButton: 'bg-gradient-to-r from-gray-200 to-gray-400 text-black'
+          container: 'backdrop-blur-sm bg-white/90 border-gray-300/30',
+          button: 'bg-gray-200/60 hover:bg-gray-300/60 text-gray-800',
+          activeButton: 'bg-gray-300 text-black',
+          text: 'text-gray-800'
         };
       default:
         return {
-          container: 'backdrop-blur-sm bg-blue-900/20 border-blue-400/30',
-          text: 'text-blue-100',
-          button: 'text-blue-200 hover:text-white hover:bg-blue-500/20',
-          activeButton: 'bg-gradient-to-r from-blue-500 to-purple-600 text-white'
+          container: 'backdrop-blur-sm bg-blue-900/90 border-blue-400/30',
+          button: 'bg-blue-600/60 hover:bg-blue-500/60 text-blue-100',
+          activeButton: 'bg-blue-500 text-white',
+          text: 'text-blue-100'
         };
     }
   };
@@ -47,10 +47,10 @@ const SettingsBar = ({ theme, onThemeChange, isOpen, onToggle }: SettingsBarProp
 
   return (
     <>
-      <div className="fixed top-4 right-4 z-50">
+      <div className="fixed top-4 right-4 z-40">
         <Button
           onClick={onToggle}
-          className={`p-2 rounded-full ${classes.button} transition-all duration-200`}
+          className={`p-3 rounded-full ${classes.button}`}
           variant="ghost"
         >
           <Settings size={20} />
@@ -58,44 +58,37 @@ const SettingsBar = ({ theme, onThemeChange, isOpen, onToggle }: SettingsBarProp
       </div>
 
       {isOpen && (
-        <div className={`fixed top-16 right-4 z-50 ${classes.container} rounded-lg border p-4 min-w-[250px]`}>
-          <div className="flex items-center justify-between mb-4">
-            <h3 className={`font-semibold ${classes.text} flex items-center`}>
-              <Palette size={18} className="mr-2" />
-              Themes
-            </h3>
+        <div className={`fixed top-0 right-0 h-full w-80 ${classes.container} border-l p-6 z-50`}>
+          <div className="flex items-center justify-between mb-6">
+            <h3 className={`text-lg font-semibold ${classes.text}`}>Settings</h3>
             <Button
               onClick={onToggle}
-              className={`p-1 ${classes.button}`}
+              className={`p-2 ${classes.button}`}
               variant="ghost"
               size="sm"
             >
               <X size={16} />
             </Button>
           </div>
-          
-          <div className="space-y-2">
-            <Button
-              onClick={() => onThemeChange('cosmic')}
-              className={`w-full justify-start ${theme === 'cosmic' ? classes.activeButton : classes.button}`}
-              variant="ghost"
-            >
-              Cosmic
-            </Button>
-            <Button
-              onClick={() => onThemeChange('dark')}
-              className={`w-full justify-start ${theme === 'dark' ? classes.activeButton : classes.button}`}
-              variant="ghost"
-            >
-              Dark
-            </Button>
-            <Button
-              onClick={() => onThemeChange('light')}
-              className={`w-full justify-start ${theme === 'light' ? classes.activeButton : classes.button}`}
-              variant="ghost"
-            >
-              Light
-            </Button>
+
+          <div className="space-y-4">
+            <div>
+              <h4 className={`text-sm font-medium ${classes.text} mb-3`}>Theme</h4>
+              <div className="space-y-2">
+                {['cosmic', 'dark', 'light'].map((themeOption) => (
+                  <Button
+                    key={themeOption}
+                    onClick={() => onThemeChange(themeOption)}
+                    className={`w-full justify-start ${
+                      theme === themeOption ? classes.activeButton : classes.button
+                    }`}
+                    variant="ghost"
+                  >
+                    {themeOption.charAt(0).toUpperCase() + themeOption.slice(1)}
+                  </Button>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       )}

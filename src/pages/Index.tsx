@@ -8,18 +8,28 @@ import MoviesGrid from "@/components/MoviesGrid";
 import SettingsBar from "@/components/SettingsBar";
 import Footer from "@/components/Footer";
 import StarField from "@/components/StarField";
+import EmbeddedBrowser from "@/components/EmbeddedBrowser";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('proxy');
   const [theme, setTheme] = useState('cosmic');
   const [showSettings, setShowSettings] = useState(false);
+  const [embeddedBrowser, setEmbeddedBrowser] = useState<{url: string, title: string} | null>(null);
+
+  const handleOpenEmbedded = (url: string, title: string) => {
+    setEmbeddedBrowser({ url, title });
+  };
+
+  const handleCloseBrowser = () => {
+    setEmbeddedBrowser(null);
+  };
 
   const renderContent = () => {
     switch (activeTab) {
       case 'proxy':
         return (
           <div className="w-full flex items-center justify-center min-h-[400px]">
-            <ProxyInput theme={theme} />
+            <ProxyInput theme={theme} onOpenEmbedded={handleOpenEmbedded} />
           </div>
         );
       case 'games':
@@ -29,11 +39,22 @@ const Index = () => {
       default:
         return (
           <div className="w-full flex items-center justify-center min-h-[400px]">
-            <ProxyInput theme={theme} />
+            <ProxyInput theme={theme} onOpenEmbedded={handleOpenEmbedded} />
           </div>
         );
     }
   };
+
+  if (embeddedBrowser) {
+    return (
+      <EmbeddedBrowser
+        url={embeddedBrowser.url}
+        title={embeddedBrowser.title}
+        theme={theme}
+        onClose={handleCloseBrowser}
+      />
+    );
+  }
 
   return (
     <div className={`min-h-screen ${theme === 'cosmic' ? 'bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900' : theme === 'dark' ? 'bg-gradient-to-br from-gray-900 to-black' : 'bg-gradient-to-br from-gray-100 to-white'} flex flex-col relative overflow-hidden`}>

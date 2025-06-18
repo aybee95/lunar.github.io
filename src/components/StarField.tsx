@@ -10,8 +10,37 @@ interface Star {
   opacity: number;
 }
 
-const StarField = () => {
+interface StarFieldProps {
+  theme: string;
+}
+
+const StarField = ({ theme }: StarFieldProps) => {
   const [stars, setStars] = useState<Star[]>([]);
+
+  const getStarColor = () => {
+    switch (theme) {
+      case 'cosmic':
+        return {
+          color: 'bg-blue-200',
+          shadow: 'rgba(147, 197, 253, 0.5)'
+        };
+      case 'dark':
+        return {
+          color: 'bg-gray-200',
+          shadow: 'rgba(229, 231, 235, 0.5)'
+        };
+      case 'light':
+        return {
+          color: 'bg-gray-400',
+          shadow: 'rgba(156, 163, 175, 0.5)'
+        };
+      default:
+        return {
+          color: 'bg-blue-200',
+          shadow: 'rgba(147, 197, 253, 0.5)'
+        };
+    }
+  };
 
   useEffect(() => {
     // Generate initial stars
@@ -61,19 +90,21 @@ const StarField = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const starColors = getStarColor();
+
   return (
     <div className="fixed inset-0 z-0">
       {stars.map(star => (
         <div
           key={star.id}
-          className="absolute rounded-full bg-blue-200"
+          className={`absolute rounded-full ${starColors.color}`}
           style={{
             left: `${star.x}px`,
             top: `${star.y}px`,
             width: `${star.size}px`,
             height: `${star.size}px`,
             opacity: star.opacity,
-            boxShadow: `0 0 ${star.size * 2}px rgba(147, 197, 253, ${star.opacity * 0.5})`,
+            boxShadow: `0 0 ${star.size * 2}px ${starColors.shadow.replace('0.5', (star.opacity * 0.5).toString())}`,
           }}
         />
       ))}

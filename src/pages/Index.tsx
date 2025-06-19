@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import TabNavigation from "@/components/TabNavigation";
@@ -11,6 +10,7 @@ import StarField from "@/components/StarField";
 import EmbeddedBrowser from "@/components/EmbeddedBrowser";
 import LoadingScreen from "@/components/LoadingScreen";
 import StartupScreen from "@/components/StartupScreen";
+import { Globe, Gamepad2, Film } from "lucide-react";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('');
@@ -49,25 +49,33 @@ const Index = () => {
         return {
           title: 'bg-gradient-to-r from-blue-200 via-purple-200 to-cyan-200 bg-clip-text text-transparent',
           subtitle: 'text-blue-200/80',
-          card: 'backdrop-blur-sm bg-blue-900/20 border-blue-400/30 hover:bg-blue-800/30'
+          card: 'backdrop-blur-sm bg-blue-900/20 border-blue-400/30 hover:bg-blue-800/30',
+          icon: 'text-white',
+          categoryTitle: 'text-blue-100'
         };
       case 'dark':
         return {
           title: 'bg-gradient-to-r from-gray-200 via-gray-300 to-gray-400 bg-clip-text text-transparent',
           subtitle: 'text-gray-200/80',
-          card: 'backdrop-blur-sm bg-gray-800/20 border-gray-600/30 hover:bg-gray-700/30'
+          card: 'backdrop-blur-sm bg-gray-800/20 border-gray-600/30 hover:bg-gray-700/30',
+          icon: 'text-white',
+          categoryTitle: 'text-gray-100'
         };
       case 'light':
         return {
           title: 'bg-gradient-to-r from-gray-800 via-gray-600 to-gray-700 bg-clip-text text-transparent',
           subtitle: 'text-gray-700/80',
-          card: 'backdrop-blur-sm bg-white/20 border-gray-300/30 hover:bg-gray-200/30'
+          card: 'backdrop-blur-sm bg-white/20 border-gray-300/30 hover:bg-gray-200/30',
+          icon: 'text-black',
+          categoryTitle: 'text-gray-800'
         };
       default:
         return {
           title: 'bg-gradient-to-r from-blue-200 via-purple-200 to-cyan-200 bg-clip-text text-transparent',
           subtitle: 'text-blue-200/80',
-          card: 'backdrop-blur-sm bg-blue-900/20 border-blue-400/30 hover:bg-blue-800/30'
+          card: 'backdrop-blur-sm bg-blue-900/20 border-blue-400/30 hover:bg-blue-800/30',
+          icon: 'text-white',
+          categoryTitle: 'text-blue-100'
         };
     }
   };
@@ -86,32 +94,56 @@ const Index = () => {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl w-full px-4">
-            <div
-              onClick={() => setActiveTab('proxy')}
-              className={`${classes.card} rounded-xl border p-8 cursor-pointer transition-all duration-200 hover:scale-105 text-center`}
-            >
-              <div className="text-4xl mb-4">🌐</div>
-              <h3 className={`text-2xl font-semibold ${classes.title} mb-2`}>Proxy</h3>
-              <p className={`${classes.subtitle}`}>Browse the web securely</p>
+          <div className="max-w-4xl w-full px-4 space-y-8">
+            {/* Proxy Row */}
+            <div className="space-y-4">
+              <h2 className={`text-2xl font-semibold ${classes.categoryTitle} text-center`}>
+                Proxy
+              </h2>
+              <div className="flex justify-center">
+                <div
+                  onClick={() => setActiveTab('proxy')}
+                  className={`${classes.card} rounded-xl border p-8 cursor-pointer transition-all duration-200 hover:scale-105 text-center w-80`}
+                >
+                  <Globe size={48} className={`${classes.icon} mb-4 mx-auto`} />
+                  <h3 className={`text-xl font-semibold ${classes.title} mb-2`}>Browse Securely</h3>
+                  <p className={`${classes.subtitle}`}>Access any website through our proxy</p>
+                </div>
+              </div>
             </div>
-            
-            <div
-              onClick={() => setActiveTab('games')}
-              className={`${classes.card} rounded-xl border p-8 cursor-pointer transition-all duration-200 hover:scale-105 text-center`}
-            >
-              <div className="text-4xl mb-4">🎮</div>
-              <h3 className={`text-2xl font-semibold ${classes.title} mb-2`}>Games</h3>
-              <p className={`${classes.subtitle}`}>Play your favorite games</p>
+
+            {/* Games Row */}
+            <div className="space-y-4">
+              <h2 className={`text-2xl font-semibold ${classes.categoryTitle} text-center`}>
+                Games
+              </h2>
+              <div className="flex justify-center">
+                <div
+                  onClick={() => setActiveTab('games')}
+                  className={`${classes.card} rounded-xl border p-8 cursor-pointer transition-all duration-200 hover:scale-105 text-center w-80`}
+                >
+                  <Gamepad2 size={48} className={`${classes.icon} mb-4 mx-auto`} />
+                  <h3 className={`text-xl font-semibold ${classes.title} mb-2`}>Play Games</h3>
+                  <p className={`${classes.subtitle}`}>Enjoy your favorite unblocked games</p>
+                </div>
+              </div>
             </div>
-            
-            <div
-              onClick={() => setActiveTab('movies')}
-              className={`${classes.card} rounded-xl border p-8 cursor-pointer transition-all duration-200 hover:scale-105 text-center`}
-            >
-              <div className="text-4xl mb-4">🎬</div>
-              <h3 className={`text-2xl font-semibold ${classes.title} mb-2`}>Movies</h3>
-              <p className={`${classes.subtitle}`}>Stream movies and shows</p>
+
+            {/* Movies Row */}
+            <div className="space-y-4">
+              <h2 className={`text-2xl font-semibold ${classes.categoryTitle} text-center`}>
+                Movies
+              </h2>
+              <div className="flex justify-center">
+                <div
+                  onClick={() => setActiveTab('movies')}
+                  className={`${classes.card} rounded-xl border p-8 cursor-pointer transition-all duration-200 hover:scale-105 text-center w-80`}
+                >
+                  <Film size={48} className={`${classes.icon} mb-4 mx-auto`} />
+                  <h3 className={`text-xl font-semibold ${classes.title} mb-2`}>Stream Content</h3>
+                  <p className={`${classes.subtitle}`}>Watch movies and TV shows</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

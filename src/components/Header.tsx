@@ -3,9 +3,10 @@ import { Moon } from "lucide-react";
 
 interface HeaderProps {
   theme: string;
+  onLogoClick?: () => void;
 }
 
-const Header = ({ theme }: HeaderProps) => {
+const Header = ({ theme, onLogoClick }: HeaderProps) => {
   const getThemeClasses = () => {
     switch (theme) {
       case 'cosmic':
@@ -36,7 +37,10 @@ const Header = ({ theme }: HeaderProps) => {
   return (
     <header className="w-full py-6 px-4">
       <div className="max-w-4xl mx-auto flex items-center justify-center">
-        <div className="flex items-center space-x-3">
+        <div 
+          className="flex items-center space-x-3 cursor-pointer hover:scale-105 transition-transform duration-200"
+          onClick={onLogoClick}
+        >
           <div className="relative">
             <Moon 
               size={36} 

@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Gamepad2, Play } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
@@ -152,15 +151,16 @@ const games = [
 
 interface GamesGridProps {
   theme: string;
+  onGameClick: (title: string, url: string) => void;
 }
 
-const GamesGrid = ({ theme }: GamesGridProps) => {
+const GamesGrid = ({ theme, onGameClick }: GamesGridProps) => {
   const handleGameClick = (game: typeof games[0]) => {
     toast({
-      title: `Launching ${game.title}`,
-      description: "Opening game in new tab...",
+      title: `Loading ${game.title}`,
+      description: "Preparing game...",
     });
-    window.open(game.url, '_blank');
+    onGameClick(game.title, game.url);
   };
 
   const getThemeClasses = () => {

@@ -1,9 +1,9 @@
-
 interface MoviesGridProps {
   theme: string;
+  onMovieClick: (title: string, url: string) => void;
 }
 
-const MoviesGrid = ({ theme }: MoviesGridProps) => {
+const MoviesGrid = ({ theme, onMovieClick }: MoviesGridProps) => {
   const getThemeClasses = () => {
     switch (theme) {
       case 'cosmic':
@@ -46,8 +46,8 @@ const MoviesGrid = ({ theme }: MoviesGridProps) => {
     { name: "Crunchyroll", url: "https://crunchyroll.com", description: "Anime Streaming" }
   ];
 
-  const handleMovieClick = (url: string) => {
-    window.open(url, '_blank');
+  const handleMovieClick = (movie: typeof movies[0]) => {
+    onMovieClick(movie.name, movie.url);
   };
 
   return (
@@ -56,7 +56,7 @@ const MoviesGrid = ({ theme }: MoviesGridProps) => {
         {movies.map((movie) => (
           <div
             key={movie.name}
-            onClick={() => handleMovieClick(movie.url)}
+            onClick={() => handleMovieClick(movie)}
             className={`${classes.card} rounded-xl border p-4 cursor-pointer transition-all duration-200 hover:scale-105`}
           >
             <h3 className={`font-semibold ${classes.text} mb-2`}>{movie.name}</h3>

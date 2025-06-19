@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import TabNavigation from "@/components/TabNavigation";
@@ -10,6 +11,7 @@ import StarField from "@/components/StarField";
 import EmbeddedBrowser from "@/components/EmbeddedBrowser";
 import LoadingScreen from "@/components/LoadingScreen";
 import StartupScreen from "@/components/StartupScreen";
+import GamePage from "@/components/GamePage";
 import { Globe, Gamepad2, Film } from "lucide-react";
 
 const Index = () => {
@@ -19,6 +21,7 @@ const Index = () => {
   const [embeddedBrowser, setEmbeddedBrowser] = useState<{url: string, title: string} | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [showStartup, setShowStartup] = useState(true);
+  const [currentGame, setCurrentGame] = useState<{title: string, url: string} | null>(null);
 
   useEffect(() => {
     // Show loading screen for 3 seconds after password is entered
@@ -41,6 +44,19 @@ const Index = () => {
 
   const handleCloseBrowser = () => {
     setEmbeddedBrowser(null);
+  };
+
+  const handleLogoClick = () => {
+    setActiveTab('');
+    setCurrentGame(null);
+  };
+
+  const handleGameClick = (title: string, url: string) => {
+    setCurrentGame({ title, url });
+  };
+
+  const handleBackFromGame = () => {
+    setCurrentGame(null);
   };
 
   const getWelcomeThemeClasses = () => {
@@ -85,6 +101,17 @@ const Index = () => {
   };
 
   const renderContent = () => {
+    if (currentGame) {
+      return (
+        <GamePage
+          title={currentGame.title}
+          url={currentGame.url}
+          theme={theme}
+          onBack={handleBackFromGame}
+        />
+      );
+    }
+
     if (!activeTab) {
       const classes = getWelcomeThemeClasses();
       return (
@@ -98,47 +125,33 @@ const Index = () => {
             </p>
           </div>
           
-          <div className="max-w-6xl w-full space-y-16">
-            {/* Proxy Section */}
-            <div className="space-y-6">
-              <h2 className={`text-3xl font-bold ${classes.categoryTitle} text-center tracking-wide`}>
-                PROXY
-              </h2>
-              <div className="flex justify-center">
-                <div
-                  onClick={() => setActiveTab('proxy')}
-                  className={`${classes.card} ${classes.glow} rounded-2xl border-2 p-10 cursor-pointer transition-all duration-300 hover:scale-105 text-center w-96 group`}
-                >
-                  <Globe size={64} className={`${classes.icon} mb-6 mx-auto group-hover:scale-110 transition-transform duration-300`} />
-                  <h3 className={`text-2xl font-bold ${classes.title} mb-3`}>Browse Securely</h3>
-                  <p className={`${classes.subtitle} text-lg leading-relaxed`}>Access any website through our secure proxy service</p>
-                </div>
+          <div className="max-w-6xl w-full">
+            <div className="flex justify-center gap-8 flex-wrap">
+              <div
+                onClick={() => setActiveTab('proxy')}
+                className={`${classes.card} ${classes.glow} rounded-2xl border-2 p-10 cursor-pointer transition-all duration-300 hover:scale-105 text-center w-80 group`}
+              >
+                <Globe size={64} className={`${classes.icon} mb-6 mx-auto group-hover:scale-110 transition-transform duration-300`} />
+                <h3 className={`text-2xl font-bold ${classes.title} mb-3`}>Proxy</h3>
+                <p className={`${classes.subtitle} text-lg leading-relaxed`}>Access any website through our secure proxy service</p>
               </div>
-            </div>
 
-            {/* Games & Movies Row */}
-            <div className="space-y-6">
-              <h2 className={`text-3xl font-bold ${classes.categoryTitle} text-center tracking-wide`}>
-                ENTERTAINMENT
-              </h2>
-              <div className="flex justify-center gap-8 flex-wrap">
-                <div
-                  onClick={() => setActiveTab('games')}
-                  className={`${classes.card} ${classes.glow} rounded-2xl border-2 p-10 cursor-pointer transition-all duration-300 hover:scale-105 text-center w-80 group`}
-                >
-                  <Gamepad2 size={56} className={`${classes.icon} mb-6 mx-auto group-hover:scale-110 transition-transform duration-300`} />
-                  <h3 className={`text-xl font-bold ${classes.title} mb-3`}>Games</h3>
-                  <p className={`${classes.subtitle} leading-relaxed`}>Enjoy your favorite unblocked games</p>
-                </div>
+              <div
+                onClick={() => setActiveTab('games')}
+                className={`${classes.card} ${classes.glow} rounded-2xl border-2 p-10 cursor-pointer transition-all duration-300 hover:scale-105 text-center w-80 group`}
+              >
+                <Gamepad2 size={64} className={`${classes.icon} mb-6 mx-auto group-hover:scale-110 transition-transform duration-300`} />
+                <h3 className={`text-2xl font-bold ${classes.title} mb-3`}>Games</h3>
+                <p className={`${classes.subtitle} text-lg leading-relaxed`}>Enjoy your favorite unblocked games</p>
+              </div>
 
-                <div
-                  onClick={() => setActiveTab('movies')}
-                  className={`${classes.card} ${classes.glow} rounded-2xl border-2 p-10 cursor-pointer transition-all duration-300 hover:scale-105 text-center w-80 group`}
-                >
-                  <Film size={56} className={`${classes.icon} mb-6 mx-auto group-hover:scale-110 transition-transform duration-300`} />
-                  <h3 className={`text-xl font-bold ${classes.title} mb-3`}>Movies</h3>
-                  <p className={`${classes.subtitle} leading-relaxed`}>Watch movies and TV shows</p>
-                </div>
+              <div
+                onClick={() => setActiveTab('movies')}
+                className={`${classes.card} ${classes.glow} rounded-2xl border-2 p-10 cursor-pointer transition-all duration-300 hover:scale-105 text-center w-80 group`}
+              >
+                <Film size={64} className={`${classes.icon} mb-6 mx-auto group-hover:scale-110 transition-transform duration-300`} />
+                <h3 className={`text-2xl font-bold ${classes.title} mb-3`}>Movies</h3>
+                <p className={`${classes.subtitle} text-lg leading-relaxed`}>Watch movies and TV shows</p>
               </div>
             </div>
           </div>
@@ -154,9 +167,9 @@ const Index = () => {
           </div>
         );
       case 'games':
-        return <GamesGrid theme={theme} />;
+        return <GamesGrid theme={theme} onGameClick={handleGameClick} />;
       case 'movies':
-        return <MoviesGrid theme={theme} />;
+        return <MoviesGrid theme={theme} onMovieClick={handleGameClick} />;
       default:
         return null;
     }
@@ -186,7 +199,7 @@ const Index = () => {
       <StarField theme={theme} />
       
       <div className="relative z-10 flex flex-col min-h-screen">
-        <Header theme={theme} />
+        <Header theme={theme} onLogoClick={handleLogoClick} />
         
         <SettingsBar 
           theme={theme} 
@@ -196,7 +209,7 @@ const Index = () => {
         />
         
         <main className="flex-grow flex flex-col items-center justify-start px-4">
-          {activeTab && (
+          {activeTab && !currentGame && (
             <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} theme={theme} />
           )}
           

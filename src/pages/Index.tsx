@@ -13,7 +13,7 @@ import LoadingScreen from "@/components/LoadingScreen";
 import StartupScreen from "@/components/StartupScreen";
 
 const Index = () => {
-  const [activeTab, setActiveTab] = useState('proxy');
+  const [activeTab, setActiveTab] = useState('');
   const [theme, setTheme] = useState('cosmic');
   const [showSettings, setShowSettings] = useState(false);
   const [embeddedBrowser, setEmbeddedBrowser] = useState<{url: string, title: string} | null>(null);
@@ -43,7 +43,81 @@ const Index = () => {
     setEmbeddedBrowser(null);
   };
 
+  const getWelcomeThemeClasses = () => {
+    switch (theme) {
+      case 'cosmic':
+        return {
+          title: 'bg-gradient-to-r from-blue-200 via-purple-200 to-cyan-200 bg-clip-text text-transparent',
+          subtitle: 'text-blue-200/80',
+          card: 'backdrop-blur-sm bg-blue-900/20 border-blue-400/30 hover:bg-blue-800/30'
+        };
+      case 'dark':
+        return {
+          title: 'bg-gradient-to-r from-gray-200 via-gray-300 to-gray-400 bg-clip-text text-transparent',
+          subtitle: 'text-gray-200/80',
+          card: 'backdrop-blur-sm bg-gray-800/20 border-gray-600/30 hover:bg-gray-700/30'
+        };
+      case 'light':
+        return {
+          title: 'bg-gradient-to-r from-gray-800 via-gray-600 to-gray-700 bg-clip-text text-transparent',
+          subtitle: 'text-gray-700/80',
+          card: 'backdrop-blur-sm bg-white/20 border-gray-300/30 hover:bg-gray-200/30'
+        };
+      default:
+        return {
+          title: 'bg-gradient-to-r from-blue-200 via-purple-200 to-cyan-200 bg-clip-text text-transparent',
+          subtitle: 'text-blue-200/80',
+          card: 'backdrop-blur-sm bg-blue-900/20 border-blue-400/30 hover:bg-blue-800/30'
+        };
+    }
+  };
+
   const renderContent = () => {
+    if (!activeTab) {
+      const classes = getWelcomeThemeClasses();
+      return (
+        <div className="w-full flex flex-col items-center justify-center min-h-[400px] space-y-8">
+          <div className="text-center space-y-4">
+            <h1 className={`text-5xl font-bold ${classes.title}`}>
+              WELCOME
+            </h1>
+            <p className={`text-xl ${classes.subtitle}`}>
+              Choose what you'd like to explore
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl w-full px-4">
+            <div
+              onClick={() => setActiveTab('proxy')}
+              className={`${classes.card} rounded-xl border p-8 cursor-pointer transition-all duration-200 hover:scale-105 text-center`}
+            >
+              <div className="text-4xl mb-4">🌐</div>
+              <h3 className={`text-2xl font-semibold ${classes.title} mb-2`}>Proxy</h3>
+              <p className={`${classes.subtitle}`}>Browse the web securely</p>
+            </div>
+            
+            <div
+              onClick={() => setActiveTab('games')}
+              className={`${classes.card} rounded-xl border p-8 cursor-pointer transition-all duration-200 hover:scale-105 text-center`}
+            >
+              <div className="text-4xl mb-4">🎮</div>
+              <h3 className={`text-2xl font-semibold ${classes.title} mb-2`}>Games</h3>
+              <p className={`${classes.subtitle}`}>Play your favorite games</p>
+            </div>
+            
+            <div
+              onClick={() => setActiveTab('movies')}
+              className={`${classes.card} rounded-xl border p-8 cursor-pointer transition-all duration-200 hover:scale-105 text-center`}
+            >
+              <div className="text-4xl mb-4">🎬</div>
+              <h3 className={`text-2xl font-semibold ${classes.title} mb-2`}>Movies</h3>
+              <p className={`${classes.subtitle}`}>Stream movies and shows</p>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
     switch (activeTab) {
       case 'proxy':
         return (
@@ -56,11 +130,7 @@ const Index = () => {
       case 'movies':
         return <MoviesGrid theme={theme} />;
       default:
-        return (
-          <div className="w-full flex items-center justify-center min-h-[400px]">
-            <ProxyInput theme={theme} onOpenEmbedded={handleOpenEmbedded} />
-          </div>
-        );
+        return null;
     }
   };
 
@@ -98,7 +168,9 @@ const Index = () => {
         />
         
         <main className="flex-grow flex flex-col items-center justify-start px-4">
-          <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} theme={theme} />
+          {activeTab && (
+            <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} theme={theme} />
+          )}
           
           <div className="w-full flex-grow flex items-start justify-center">
             {renderContent()}

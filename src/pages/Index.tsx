@@ -49,33 +49,37 @@ const Index = () => {
         return {
           title: 'bg-gradient-to-r from-blue-200 via-purple-200 to-cyan-200 bg-clip-text text-transparent',
           subtitle: 'text-blue-200/80',
-          card: 'backdrop-blur-sm bg-blue-900/20 border-blue-400/30 hover:bg-blue-800/30',
+          card: 'backdrop-blur-md bg-blue-900/30 border-blue-400/40 hover:bg-blue-800/40 hover:border-blue-300/60 shadow-lg hover:shadow-blue-500/20',
           icon: 'text-white',
-          categoryTitle: 'text-blue-100'
+          categoryTitle: 'text-blue-100',
+          glow: 'shadow-2xl shadow-blue-500/10'
         };
       case 'dark':
         return {
           title: 'bg-gradient-to-r from-gray-200 via-gray-300 to-gray-400 bg-clip-text text-transparent',
           subtitle: 'text-gray-200/80',
-          card: 'backdrop-blur-sm bg-gray-800/20 border-gray-600/30 hover:bg-gray-700/30',
+          card: 'backdrop-blur-md bg-gray-800/30 border-gray-600/40 hover:bg-gray-700/40 hover:border-gray-500/60 shadow-lg hover:shadow-gray-500/20',
           icon: 'text-white',
-          categoryTitle: 'text-gray-100'
+          categoryTitle: 'text-gray-100',
+          glow: 'shadow-2xl shadow-gray-500/10'
         };
       case 'light':
         return {
           title: 'bg-gradient-to-r from-gray-800 via-gray-600 to-gray-700 bg-clip-text text-transparent',
           subtitle: 'text-gray-700/80',
-          card: 'backdrop-blur-sm bg-white/20 border-gray-300/30 hover:bg-gray-200/30',
+          card: 'backdrop-blur-md bg-white/40 border-gray-300/50 hover:bg-gray-100/50 hover:border-gray-400/70 shadow-lg hover:shadow-gray-300/30',
           icon: 'text-black',
-          categoryTitle: 'text-gray-800'
+          categoryTitle: 'text-gray-800',
+          glow: 'shadow-2xl shadow-gray-300/20'
         };
       default:
         return {
           title: 'bg-gradient-to-r from-blue-200 via-purple-200 to-cyan-200 bg-clip-text text-transparent',
           subtitle: 'text-blue-200/80',
-          card: 'backdrop-blur-sm bg-blue-900/20 border-blue-400/30 hover:bg-blue-800/30',
+          card: 'backdrop-blur-md bg-blue-900/30 border-blue-400/40 hover:bg-blue-800/40 hover:border-blue-300/60 shadow-lg hover:shadow-blue-500/20',
           icon: 'text-white',
-          categoryTitle: 'text-blue-100'
+          categoryTitle: 'text-blue-100',
+          glow: 'shadow-2xl shadow-blue-500/10'
         };
     }
   };
@@ -84,64 +88,56 @@ const Index = () => {
     if (!activeTab) {
       const classes = getWelcomeThemeClasses();
       return (
-        <div className="w-full flex flex-col items-center justify-center min-h-[400px] space-y-8">
-          <div className="text-center space-y-4">
-            <h1 className={`text-5xl font-bold ${classes.title}`}>
+        <div className="w-full flex flex-col items-center justify-center min-h-[500px] space-y-12 px-4">
+          <div className="text-center space-y-6">
+            <h1 className={`text-6xl font-bold ${classes.title} drop-shadow-lg`}>
               WELCOME
             </h1>
-            <p className={`text-xl ${classes.subtitle}`}>
+            <p className={`text-2xl ${classes.subtitle} font-medium`}>
               Choose what you'd like to explore
             </p>
           </div>
           
-          <div className="max-w-4xl w-full px-4 space-y-8">
-            {/* Proxy Row */}
-            <div className="space-y-4">
-              <h2 className={`text-2xl font-semibold ${classes.categoryTitle} text-center`}>
-                Proxy
+          <div className="max-w-6xl w-full space-y-16">
+            {/* Proxy Section */}
+            <div className="space-y-6">
+              <h2 className={`text-3xl font-bold ${classes.categoryTitle} text-center tracking-wide`}>
+                PROXY
               </h2>
               <div className="flex justify-center">
                 <div
                   onClick={() => setActiveTab('proxy')}
-                  className={`${classes.card} rounded-xl border p-8 cursor-pointer transition-all duration-200 hover:scale-105 text-center w-80`}
+                  className={`${classes.card} ${classes.glow} rounded-2xl border-2 p-10 cursor-pointer transition-all duration-300 hover:scale-105 text-center w-96 group`}
                 >
-                  <Globe size={48} className={`${classes.icon} mb-4 mx-auto`} />
-                  <h3 className={`text-xl font-semibold ${classes.title} mb-2`}>Browse Securely</h3>
-                  <p className={`${classes.subtitle}`}>Access any website through our proxy</p>
+                  <Globe size={64} className={`${classes.icon} mb-6 mx-auto group-hover:scale-110 transition-transform duration-300`} />
+                  <h3 className={`text-2xl font-bold ${classes.title} mb-3`}>Browse Securely</h3>
+                  <p className={`${classes.subtitle} text-lg leading-relaxed`}>Access any website through our secure proxy service</p>
                 </div>
               </div>
             </div>
 
-            {/* Games Row */}
-            <div className="space-y-4">
-              <h2 className={`text-2xl font-semibold ${classes.categoryTitle} text-center`}>
-                Games
+            {/* Games & Movies Row */}
+            <div className="space-y-6">
+              <h2 className={`text-3xl font-bold ${classes.categoryTitle} text-center tracking-wide`}>
+                ENTERTAINMENT
               </h2>
-              <div className="flex justify-center">
+              <div className="flex justify-center gap-8 flex-wrap">
                 <div
                   onClick={() => setActiveTab('games')}
-                  className={`${classes.card} rounded-xl border p-8 cursor-pointer transition-all duration-200 hover:scale-105 text-center w-80`}
+                  className={`${classes.card} ${classes.glow} rounded-2xl border-2 p-10 cursor-pointer transition-all duration-300 hover:scale-105 text-center w-80 group`}
                 >
-                  <Gamepad2 size={48} className={`${classes.icon} mb-4 mx-auto`} />
-                  <h3 className={`text-xl font-semibold ${classes.title} mb-2`}>Play Games</h3>
-                  <p className={`${classes.subtitle}`}>Enjoy your favorite unblocked games</p>
+                  <Gamepad2 size={56} className={`${classes.icon} mb-6 mx-auto group-hover:scale-110 transition-transform duration-300`} />
+                  <h3 className={`text-xl font-bold ${classes.title} mb-3`}>Games</h3>
+                  <p className={`${classes.subtitle} leading-relaxed`}>Enjoy your favorite unblocked games</p>
                 </div>
-              </div>
-            </div>
 
-            {/* Movies Row */}
-            <div className="space-y-4">
-              <h2 className={`text-2xl font-semibold ${classes.categoryTitle} text-center`}>
-                Movies
-              </h2>
-              <div className="flex justify-center">
                 <div
                   onClick={() => setActiveTab('movies')}
-                  className={`${classes.card} rounded-xl border p-8 cursor-pointer transition-all duration-200 hover:scale-105 text-center w-80`}
+                  className={`${classes.card} ${classes.glow} rounded-2xl border-2 p-10 cursor-pointer transition-all duration-300 hover:scale-105 text-center w-80 group`}
                 >
-                  <Film size={48} className={`${classes.icon} mb-4 mx-auto`} />
-                  <h3 className={`text-xl font-semibold ${classes.title} mb-2`}>Stream Content</h3>
-                  <p className={`${classes.subtitle}`}>Watch movies and TV shows</p>
+                  <Film size={56} className={`${classes.icon} mb-6 mx-auto group-hover:scale-110 transition-transform duration-300`} />
+                  <h3 className={`text-xl font-bold ${classes.title} mb-3`}>Movies</h3>
+                  <p className={`${classes.subtitle} leading-relaxed`}>Watch movies and TV shows</p>
                 </div>
               </div>
             </div>

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import TabNavigation from "@/components/TabNavigation";
@@ -12,7 +11,8 @@ import EmbeddedBrowser from "@/components/EmbeddedBrowser";
 import LoadingScreen from "@/components/LoadingScreen";
 import StartupScreen from "@/components/StartupScreen";
 import GamePage from "@/components/GamePage";
-import { Globe, Gamepad2, Film } from "lucide-react";
+import BackgroundMusic from "@/components/BackgroundMusic";
+import Globe, { Gamepad2, Film } from "lucide-react";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('');
@@ -63,39 +63,39 @@ const Index = () => {
     switch (theme) {
       case 'cosmic':
         return {
-          title: 'bg-gradient-to-r from-blue-200 via-purple-200 to-cyan-200 bg-clip-text text-transparent',
-          subtitle: 'text-blue-200/80',
-          card: 'backdrop-blur-md bg-blue-900/30 border-blue-400/40 hover:bg-blue-800/40 hover:border-blue-300/60 shadow-lg hover:shadow-blue-500/20',
-          icon: 'text-white',
-          categoryTitle: 'text-blue-100',
-          glow: 'shadow-2xl shadow-blue-500/10'
+          title: 'bg-gradient-to-r from-blue-200 via-purple-200 to-cyan-200 bg-clip-text text-transparent drop-shadow-2xl',
+          subtitle: 'text-blue-200/90 drop-shadow-lg',
+          card: 'backdrop-blur-lg bg-blue-900/40 border-blue-400/50 hover:bg-blue-800/50 hover:border-blue-300/70 shadow-2xl hover:shadow-blue-500/30 hover:shadow-2xl',
+          icon: 'text-white drop-shadow-lg',
+          categoryTitle: 'text-blue-100 drop-shadow-md',
+          glow: 'shadow-3xl shadow-blue-500/20 hover:shadow-blue-400/40'
         };
       case 'dark':
         return {
-          title: 'bg-gradient-to-r from-gray-200 via-gray-300 to-gray-400 bg-clip-text text-transparent',
-          subtitle: 'text-gray-200/80',
-          card: 'backdrop-blur-md bg-gray-800/30 border-gray-600/40 hover:bg-gray-700/40 hover:border-gray-500/60 shadow-lg hover:shadow-gray-500/20',
-          icon: 'text-white',
-          categoryTitle: 'text-gray-100',
-          glow: 'shadow-2xl shadow-gray-500/10'
+          title: 'bg-gradient-to-r from-gray-200 via-gray-300 to-gray-400 bg-clip-text text-transparent drop-shadow-2xl',
+          subtitle: 'text-gray-200/90 drop-shadow-lg',
+          card: 'backdrop-blur-lg bg-gray-800/40 border-gray-600/50 hover:bg-gray-700/50 hover:border-gray-500/70 shadow-2xl hover:shadow-gray-500/30',
+          icon: 'text-white drop-shadow-lg',
+          categoryTitle: 'text-gray-100 drop-shadow-md',
+          glow: 'shadow-3xl shadow-gray-500/20 hover:shadow-gray-400/40'
         };
       case 'light':
         return {
-          title: 'bg-gradient-to-r from-gray-800 via-gray-600 to-gray-700 bg-clip-text text-transparent',
-          subtitle: 'text-gray-700/80',
-          card: 'backdrop-blur-md bg-white/40 border-gray-300/50 hover:bg-gray-100/50 hover:border-gray-400/70 shadow-lg hover:shadow-gray-300/30',
-          icon: 'text-black',
-          categoryTitle: 'text-gray-800',
-          glow: 'shadow-2xl shadow-gray-300/20'
+          title: 'bg-gradient-to-r from-gray-800 via-gray-600 to-gray-700 bg-clip-text text-transparent drop-shadow-2xl',
+          subtitle: 'text-gray-700/90 drop-shadow-lg',
+          card: 'backdrop-blur-lg bg-white/50 border-gray-300/60 hover:bg-gray-100/60 hover:border-gray-400/80 shadow-2xl hover:shadow-gray-300/40',
+          icon: 'text-black drop-shadow-lg',
+          categoryTitle: 'text-gray-800 drop-shadow-md',
+          glow: 'shadow-3xl shadow-gray-300/30 hover:shadow-gray-400/50'
         };
       default:
         return {
-          title: 'bg-gradient-to-r from-blue-200 via-purple-200 to-cyan-200 bg-clip-text text-transparent',
-          subtitle: 'text-blue-200/80',
-          card: 'backdrop-blur-md bg-blue-900/30 border-blue-400/40 hover:bg-blue-800/40 hover:border-blue-300/60 shadow-lg hover:shadow-blue-500/20',
-          icon: 'text-white',
-          categoryTitle: 'text-blue-100',
-          glow: 'shadow-2xl shadow-blue-500/10'
+          title: 'bg-gradient-to-r from-blue-200 via-purple-200 to-cyan-200 bg-clip-text text-transparent drop-shadow-2xl',
+          subtitle: 'text-blue-200/90 drop-shadow-lg',
+          card: 'backdrop-blur-lg bg-blue-900/40 border-blue-400/50 hover:bg-blue-800/50 hover:border-blue-300/70 shadow-2xl hover:shadow-blue-500/30',
+          icon: 'text-white drop-shadow-lg',
+          categoryTitle: 'text-blue-100 drop-shadow-md',
+          glow: 'shadow-3xl shadow-blue-500/20 hover:shadow-blue-400/40'
         };
     }
   };
@@ -197,6 +197,7 @@ const Index = () => {
   return (
     <div className={`min-h-screen ${theme === 'cosmic' ? 'bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900' : theme === 'dark' ? 'bg-gradient-to-br from-gray-900 to-black' : 'bg-gradient-to-br from-gray-100 to-white'} flex flex-col relative overflow-hidden`}>
       <StarField theme={theme} />
+      <BackgroundMusic theme={theme} />
       
       <div className="relative z-10 flex flex-col min-h-screen">
         <Header theme={theme} onLogoClick={handleLogoClick} />

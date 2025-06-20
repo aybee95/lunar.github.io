@@ -12,7 +12,7 @@ import LoadingScreen from "@/components/LoadingScreen";
 import StartupScreen from "@/components/StartupScreen";
 import GamePage from "@/components/GamePage";
 import BackgroundMusic from "@/components/BackgroundMusic";
-import Globe, { Gamepad2, Film } from "lucide-react";
+import { Globe, Gamepad2, Film } from "lucide-react";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('');

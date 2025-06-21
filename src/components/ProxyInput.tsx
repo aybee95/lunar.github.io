@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Globe, ArrowRight, Search } from "lucide-react";
+import { ArrowRight, Search } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
 interface ProxyInputProps {
@@ -21,8 +21,7 @@ const ProxyInput = ({ theme, onOpenEmbedded }: ProxyInputProps) => {
           input: 'bg-blue-900/30 border-blue-400/40 text-blue-100 placeholder:text-blue-300 focus:border-blue-400 focus:ring-blue-400/20',
           button: 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700',
           text: 'text-blue-100',
-          subtext: 'text-blue-200',
-          quickButton: 'bg-blue-600/60 hover:bg-blue-500/60 text-blue-100'
+          subtext: 'text-blue-200'
         };
       case 'dark':
         return {
@@ -30,8 +29,7 @@ const ProxyInput = ({ theme, onOpenEmbedded }: ProxyInputProps) => {
           input: 'bg-gray-800/30 border-gray-600/40 text-gray-100 placeholder:text-gray-300 focus:border-gray-600 focus:ring-gray-600/20',
           button: 'bg-gradient-to-r from-gray-600 to-gray-800 hover:from-gray-700 hover:to-gray-900',
           text: 'text-gray-100',
-          subtext: 'text-gray-200',
-          quickButton: 'bg-gray-600/60 hover:bg-gray-500/60 text-gray-100'
+          subtext: 'text-gray-200'
         };
       case 'light':
         return {
@@ -39,8 +37,7 @@ const ProxyInput = ({ theme, onOpenEmbedded }: ProxyInputProps) => {
           input: 'bg-white/30 border-gray-300/40 text-gray-800 placeholder:text-gray-600 focus:border-gray-400 focus:ring-gray-400/20',
           button: 'bg-gradient-to-r from-gray-200 to-gray-400 hover:from-gray-300 hover:to-gray-500',
           text: 'text-gray-800',
-          subtext: 'text-gray-700',
-          quickButton: 'bg-gray-200/60 hover:bg-gray-300/60 text-gray-800'
+          subtext: 'text-gray-700'
         };
       default:
         return {
@@ -48,8 +45,7 @@ const ProxyInput = ({ theme, onOpenEmbedded }: ProxyInputProps) => {
           input: 'bg-blue-900/30 border-blue-400/40 text-blue-100 placeholder:text-blue-300 focus:border-blue-400 focus:ring-blue-400/20',
           button: 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700',
           text: 'text-blue-100',
-          subtext: 'text-blue-200',
-          quickButton: 'bg-blue-600/60 hover:bg-blue-500/60 text-blue-100'
+          subtext: 'text-blue-200'
         };
     }
   };
@@ -58,7 +54,6 @@ const ProxyInput = ({ theme, onOpenEmbedded }: ProxyInputProps) => {
 
   const isUrl = (text: string) => {
     try {
-      // Check if it's a URL-like pattern
       const urlPattern = /^(https?:\/\/)?([a-z0-9-]+\.)+[a-z]{2,}(\/.*)?$/i;
       const domainPattern = /^[a-z0-9-]+\.[a-z]{2,}$/i;
       
@@ -83,24 +78,24 @@ const ProxyInput = ({ theme, onOpenEmbedded }: ProxyInputProps) => {
     let title: string;
     
     if (isUrl(input)) {
-      // It's a URL
       finalUrl = input.startsWith('http://') || input.startsWith('https://') ? input : 'https://' + input;
       title = input;
       
       toast({
-        title: "Connecting through Lunar Proxy",
-        description: `Routing to ${finalUrl}`,
+        title: "Opening website",
+        description: `Loading ${finalUrl}`,
       });
     } else {
-      // It's a search query
       finalUrl = `https://duckduckgo.com/?q=${encodeURIComponent(input)}`;
       title = `Search: ${input}`;
       
       toast({
-        title: "Searching with DuckDuckGo",
+        title: "Searching",
         description: `Searching for "${input}"`,
       });
     }
+    
+    console.log('Opening URL:', finalUrl);
     
     if (onOpenEmbedded) {
       onOpenEmbedded(finalUrl, title);
@@ -108,17 +103,6 @@ const ProxyInput = ({ theme, onOpenEmbedded }: ProxyInputProps) => {
       setTimeout(() => {
         window.open(finalUrl, '_blank');
       }, 1000);
-    }
-  };
-
-  const handleQuickAccess = (site: string, url: string) => {
-    toast({
-      title: `Opening ${site}`,
-      description: "Loading in embedded browser",
-    });
-    
-    if (onOpenEmbedded) {
-      onOpenEmbedded(url, site);
     }
   };
 
@@ -130,7 +114,7 @@ const ProxyInput = ({ theme, onOpenEmbedded }: ProxyInputProps) => {
             Browse & Search
           </h2>
           <p className={classes.subtext}>
-            Enter a website URL or search query - we'll handle the rest
+            Enter a website URL or search query
           </p>
         </div>
         
@@ -139,7 +123,7 @@ const ProxyInput = ({ theme, onOpenEmbedded }: ProxyInputProps) => {
             <Search className={`absolute left-3 top-1/2 transform -translate-y-1/2 ${classes.subtext}`} size={20} />
             <Input
               type="text"
-              placeholder="Enter URL (youtube.com) or search query (space videos)"
+              placeholder="Enter URL or search query"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               className={`pl-12 h-14 ${classes.input}`}
@@ -150,30 +134,10 @@ const ProxyInput = ({ theme, onOpenEmbedded }: ProxyInputProps) => {
             type="submit"
             className={`w-full h-14 ${classes.button} text-white font-semibold transition-all duration-200 shadow-lg`}
           >
-            {input && isUrl(input) ? 'Connect Through Proxy' : 'Search with DuckDuckGo'}
+            Search
             <ArrowRight className="ml-2" size={20} />
           </Button>
         </form>
-        
-        <div className="mt-6">
-          <p className={`text-sm ${classes.subtext} mb-3 text-center`}>Quick Access:</p>
-          <div className="flex gap-2 justify-center">
-            <Button
-              onClick={() => handleQuickAccess('DuckDuckGo', 'https://duckduckgo.com')}
-              className={`${classes.quickButton} px-4 py-2`}
-              variant="ghost"
-            >
-              DuckDuckGo
-            </Button>
-            <Button
-              onClick={() => handleQuickAccess('Wikipedia', 'https://wikipedia.org')}
-              className={`${classes.quickButton} px-4 py-2`}
-              variant="ghost"
-            >
-              Wikipedia
-            </Button>
-          </div>
-        </div>
         
         <div className="mt-6 text-center">
           <p className={`text-sm ${classes.subtext}`}>

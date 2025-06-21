@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Globe, ArrowRight } from "lucide-react";
+import { Globe, ArrowRight, Search } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
 interface ProxyInputProps {
@@ -11,7 +11,7 @@ interface ProxyInputProps {
 }
 
 const ProxyInput = ({ theme, onOpenEmbedded }: ProxyInputProps) => {
-  const [url, setUrl] = useState("");
+  const [input, setInput] = useState("");
 
   const getThemeClasses = () => {
     switch (theme) {
@@ -56,32 +56,57 @@ const ProxyInput = ({ theme, onOpenEmbedded }: ProxyInputProps) => {
 
   const classes = getThemeClasses();
 
+  const isUrl = (text: string) => {
+    try {
+      // Check if it's a URL-like pattern
+      const urlPattern = /^(https?:\/\/)?([a-z0-9-]+\.)+[a-z]{2,}(\/.*)?$/i;
+      const domainPattern = /^[a-z0-9-]+\.[a-z]{2,}$/i;
+      
+      return urlPattern.test(text) || domainPattern.test(text) || text.startsWith('http://') || text.startsWith('https://');
+    } catch {
+      return false;
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!url) {
+    if (!input.trim()) {
       toast({
-        title: "Please enter a URL",
-        description: "Enter a website URL to access through the proxy",
+        title: "Please enter something",
+        description: "Enter a website URL or search query",
         variant: "destructive",
       });
       return;
     }
     
-    let formattedUrl = url;
-    if (!url.startsWith('http://') && !url.startsWith('https://')) {
-      formattedUrl = 'https://' + url;
+    let finalUrl: string;
+    let title: string;
+    
+    if (isUrl(input)) {
+      // It's a URL
+      finalUrl = input.startsWith('http://') || input.startsWith('https://') ? input : 'https://' + input;
+      title = input;
+      
+      toast({
+        title: "Connecting through Lunar Proxy",
+        description: `Routing to ${finalUrl}`,
+      });
+    } else {
+      // It's a search query
+      finalUrl = `https://duckduckgo.com/?q=${encodeURIComponent(input)}`;
+      title = `Search: ${input}`;
+      
+      toast({
+        title: "Searching with DuckDuckGo",
+        description: `Searching for "${input}"`,
+      });
     }
     
-    toast({
-      title: "Connecting through Lunar Proxy",
-      description: `Routing to ${formattedUrl}`,
-    });
-    
     if (onOpenEmbedded) {
-      onOpenEmbedded(formattedUrl, url);
+      onOpenEmbedded(finalUrl, title);
     } else {
       setTimeout(() => {
-        window.open(formattedUrl, '_blank');
+        window.open(finalUrl, '_blank');
       }, 1000);
     }
   };
@@ -102,21 +127,21 @@ const ProxyInput = ({ theme, onOpenEmbedded }: ProxyInputProps) => {
       <div className={`${classes.container} rounded-2xl border p-8 shadow-2xl`}>
         <div className="text-center mb-8">
           <h2 className={`text-2xl font-semibold ${classes.text} mb-2`}>
-            Access Any Website
+            Browse & Search
           </h2>
           <p className={classes.subtext}>
-            Bypass restrictions and browse freely through our secure proxy
+            Enter a website URL or search query - we'll handle the rest
           </p>
         </div>
         
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="relative">
-            <Globe className={`absolute left-3 top-1/2 transform -translate-y-1/2 ${classes.subtext}`} size={20} />
+            <Search className={`absolute left-3 top-1/2 transform -translate-y-1/2 ${classes.subtext}`} size={20} />
             <Input
               type="text"
-              placeholder="Enter website URL (e.g., youtube.com)"
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
+              placeholder="Enter URL (youtube.com) or search query (space videos)"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
               className={`pl-12 h-14 ${classes.input}`}
             />
           </div>
@@ -125,7 +150,7 @@ const ProxyInput = ({ theme, onOpenEmbedded }: ProxyInputProps) => {
             type="submit"
             className={`w-full h-14 ${classes.button} text-white font-semibold transition-all duration-200 shadow-lg`}
           >
-            Connect Through Proxy
+            {input && isUrl(input) ? 'Connect Through Proxy' : 'Search with DuckDuckGo'}
             <ArrowRight className="ml-2" size={20} />
           </Button>
         </form>
@@ -134,25 +159,25 @@ const ProxyInput = ({ theme, onOpenEmbedded }: ProxyInputProps) => {
           <p className={`text-sm ${classes.subtext} mb-3 text-center`}>Quick Access:</p>
           <div className="flex gap-2 justify-center">
             <Button
-              onClick={() => handleQuickAccess('Google', 'https://google.com')}
-              className={`${classes.quickButton} px-4 py-2`}
-              variant="ghost"
-            >
-              Google
-            </Button>
-            <Button
               onClick={() => handleQuickAccess('DuckDuckGo', 'https://duckduckgo.com')}
               className={`${classes.quickButton} px-4 py-2`}
               variant="ghost"
             >
               DuckDuckGo
             </Button>
+            <Button
+              onClick={() => handleQuickAccess('Wikipedia', 'https://wikipedia.org')}
+              className={`${classes.quickButton} px-4 py-2`}
+              variant="ghost"
+            >
+              Wikipedia
+            </Button>
           </div>
         </div>
         
         <div className="mt-6 text-center">
           <p className={`text-sm ${classes.subtext}`}>
-            Secure • Fast • Free
+            Secure • Private • Fast
           </p>
         </div>
       </div>

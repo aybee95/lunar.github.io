@@ -86,7 +86,8 @@ const ProxyInput = ({ theme, onOpenEmbedded }: ProxyInputProps) => {
         description: `Loading ${finalUrl}`,
       });
     } else {
-      finalUrl = `https://duckduckgo.com/?q=${encodeURIComponent(input)}`;
+      // Using Startpage instead of DuckDuckGo as it's more iframe-friendly
+      finalUrl = `https://www.startpage.com/sp/search?query=${encodeURIComponent(input)}`;
       title = `Search: ${input}`;
       
       toast({

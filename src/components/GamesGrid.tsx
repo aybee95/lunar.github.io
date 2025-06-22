@@ -1,151 +1,297 @@
+
 import { Button } from "@/components/ui/button";
 import { Gamepad2, Play } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
 const games = [
+  // Action Games
   {
-    title: "2048",
-    description: "Addictive number puzzle game",
-    url: "https://play2048.co/",
-    category: "Puzzle"
-  },
-  {
-    title: "Tetris",
-    description: "Classic falling blocks game",
-    url: "https://tetris.com/play-tetris",
-    category: "Arcade"
-  },
-  {
-    title: "Snake",
-    description: "Retro snake eating game",
-    url: "https://www.google.com/fbx?fbx=snake_arcade",
-    category: "Arcade"
-  },
-  {
-    title: "Pac-Man",
-    description: "Classic maze chase game",
-    url: "https://www.google.com/logos/2010/pacman10-i.html",
-    category: "Arcade"
-  },
-  {
-    title: "Slope",
-    description: "High-speed ball rolling game",
-    url: "https://slope-game.github.io/",
+    title: "Fortnite",
+    description: "Battle royale phenomenon",
+    url: "https://now.gg/play/epic-games/4927/fortnite",
     category: "Action"
   },
   {
-    title: "Flappy Bird",
-    description: "Navigate through pipes",
-    url: "https://flappybird.io/",
-    category: "Arcade"
+    title: "PUBG Mobile",
+    description: "Mobile battle royale classic",
+    url: "https://now.gg/play/proxima-beta/5052/pubg-mobile-resistance",
+    category: "Action"
+  },
+  {
+    title: "Call of Duty Mobile",
+    description: "Premium mobile FPS experience",
+    url: "https://now.gg/play/activision-publishing-inc/2609/call-of-duty-mobile",
+    category: "Action"
+  },
+  {
+    title: "Free Fire",
+    description: "Fast-paced battle royale",
+    url: "https://now.gg/play/garena-international-i/2124/free-fire",
+    category: "Action"
   },
   {
     title: "Subway Surfers",
     description: "Endless running adventure",
-    url: "https://poki.com/en/g/subway-surfers",
+    url: "https://now.gg/play/sybo/1942/subway-surfers",
     category: "Action"
+  },
+  {
+    title: "Temple Run 2",
+    description: "Endless temple adventure",
+    url: "https://now.gg/play/imangi-studios/1819/temple-run-2",
+    category: "Action"
+  },
+  {
+    title: "Jetpack Joyride",
+    description: "High-flying action game",
+    url: "https://now.gg/play/halfbrick-studios/1695/jetpack-joyride",
+    category: "Action"
+  },
+  {
+    title: "Crossy Road",
+    description: "Endless arcade hopper",
+    url: "https://now.gg/play/hipster-whale/1933/crossy-road",
+    category: "Action"
+  },
+
+  // Strategy Games
+  {
+    title: "Clash of Clans",
+    description: "Build and battle strategy",
+    url: "https://now.gg/play/supercell/1441/clash-of-clans",
+    category: "Strategy"
+  },
+  {
+    title: "Clash Royale",
+    description: "Real-time strategy battles",
+    url: "https://now.gg/play/supercell/1053/clash-royale",
+    category: "Strategy"
+  },
+  {
+    title: "Boom Beach",
+    description: "Combat strategy on tropical islands",
+    url: "https://now.gg/play/supercell/1958/boom-beach",
+    category: "Strategy"
+  },
+  {
+    title: "Plants vs Zombies 2",
+    description: "Tower defense with plants",
+    url: "https://now.gg/play/electronic-arts/1677/plants-vs-zombies-2",
+    category: "Strategy"
+  },
+  {
+    title: "Age of Empires Mobile",
+    description: "Classic RTS on mobile",
+    url: "https://now.gg/play/timi-studio-group/5658/age-of-empires-mobile",
+    category: "Strategy"
+  },
+
+  // Racing Games
+  {
+    title: "Asphalt 9",
+    description: "High-speed arcade racing",
+    url: "https://now.gg/play/gameloft/1677/asphalt-9-legends",
+    category: "Racing"
+  },
+  {
+    title: "CSR Racing 2",
+    description: "Drag racing at its finest",
+    url: "https://now.gg/play/naturalmotion/1396/csr-racing-2",
+    category: "Racing"
+  },
+  {
+    title: "Real Racing 3",
+    description: "Realistic racing simulation",
+    url: "https://now.gg/play/electronic-arts/1677/real-racing-3",
+    category: "Racing"
+  },
+  {
+    title: "Hill Climb Racing",
+    description: "Physics-based driving game",
+    url: "https://now.gg/play/fingersoft/1819/hill-climb-racing",
+    category: "Racing"
+  },
+
+  // RPG Games
+  {
+    title: "Genshin Impact",
+    description: "Open-world action RPG",
+    url: "https://now.gg/play/cognosphere-pte-ltd/5430/genshin-impact",
+    category: "RPG"
+  },
+  {
+    title: "Raid Shadow Legends",
+    description: "Fantasy turn-based RPG",
+    url: "https://now.gg/play/plarium-llc/2609/raid-shadow-legends",
+    category: "RPG"
+  },
+  {
+    title: "AFK Arena",
+    description: "Idle RPG adventure",
+    url: "https://now.gg/play/lilith-games/3139/afk-arena",
+    category: "RPG"
+  },
+  {
+    title: "Epic Seven",
+    description: "Anime-style turn-based RPG",
+    url: "https://now.gg/play/smilegate-megaport/2946/epic-seven",
+    category: "RPG"
+  },
+
+  // Sports Games
+  {
+    title: "FIFA Mobile",
+    description: "Ultimate football experience",
+    url: "https://now.gg/play/electronic-arts/1677/fifa-mobile",
+    category: "Sports"
+  },
+  {
+    title: "NBA 2K Mobile",
+    description: "Professional basketball action",
+    url: "https://now.gg/play/2k-inc/4758/nba-2k-mobile-basketball",
+    category: "Sports"
+  },
+  {
+    title: "8 Ball Pool",
+    description: "Classic billiards game",
+    url: "https://now.gg/play/miniclip/1063/8-ball-pool",
+    category: "Sports"
+  },
+  {
+    title: "Golf Clash",
+    description: "Real-time golf duels",
+    url: "https://now.gg/play/playdemic/1396/golf-clash",
+    category: "Sports"
+  },
+
+  // Puzzle Games
+  {
+    title: "Candy Crush Saga",
+    description: "Sweet match-3 puzzle game",
+    url: "https://now.gg/play/king/1441/candy-crush-saga",
+    category: "Puzzle"
+  },
+  {
+    title: "Gardenscapes",
+    description: "Match-3 garden restoration",
+    url: "https://now.gg/play/playrix/1677/gardenscapes",
+    category: "Puzzle"
+  },
+  {
+    title: "Homescapes",
+    description: "Match-3 home renovation",
+    url: "https://now.gg/play/playrix/1677/homescapes",
+    category: "Puzzle"
+  },
+  {
+    title: "Monument Valley",
+    description: "Surreal puzzle adventure",
+    url: "https://now.gg/play/ustwo-games/3847/monument-valley",
+    category: "Puzzle"
+  },
+  {
+    title: "Cut the Rope",
+    description: "Physics puzzle with Om Nom",
+    url: "https://now.gg/play/zeptolab/1819/cut-the-rope",
+    category: "Puzzle"
+  },
+
+  // Simulation Games
+  {
+    title: "SimCity BuildIt",
+    description: "City building simulation",
+    url: "https://now.gg/play/electronic-arts/1677/simcity-buildit",
+    category: "Simulation"
+  },
+  {
+    title: "The Sims Mobile",
+    description: "Life simulation game",
+    url: "https://now.gg/play/electronic-arts/1677/the-sims-mobile",
+    category: "Simulation"
+  },
+  {
+    title: "RollerCoaster Tycoon Touch",
+    description: "Theme park building sim",
+    url: "https://now.gg/play/atari/2946/rollercoaster-tycoon-touch",
+    category: "Simulation"
+  },
+  {
+    title: "Hay Day",
+    description: "Farm building and management",
+    url: "https://now.gg/play/supercell/1441/hay-day",
+    category: "Simulation"
+  },
+
+  // Adventure Games
+  {
+    title: "Roblox",
+    description: "Create and play together",
+    url: "https://now.gg/play/roblox-corporation/5349/roblox",
+    category: "Adventure"
+  },
+  {
+    title: "Minecraft",
+    description: "Block building sandbox",
+    url: "https://now.gg/play/mojang/4128/minecraft",
+    category: "Adventure"
   },
   {
     title: "Among Us",
     description: "Social deduction game",
-    url: "https://www.crazygames.com/game/among-us",
-    category: "Social"
+    url: "https://now.gg/play/innersloth-llc/4047/among-us",
+    category: "Adventure"
   },
   {
-    title: "Geometry Dash",
-    description: "Rhythm-based platformer",
-    url: "https://scratch.mit.edu/projects/105500895/",
-    category: "Platform"
+    title: "Pokemon GO",
+    description: "Augmented reality adventure",
+    url: "https://now.gg/play/niantic-inc/1677/pokemon-go",
+    category: "Adventure"
+  },
+
+  // Card Games
+  {
+    title: "Hearthstone",
+    description: "Strategic card battles",
+    url: "https://now.gg/play/blizzard-entertainment/3758/hearthstone",
+    category: "Card"
   },
   {
-    title: "Minecraft Classic",
-    description: "Block building sandbox",
-    url: "https://classic.minecraft.net/",
-    category: "Sandbox"
-  },
-  {
-    title: "Shell Shockers",
-    description: "Egg-based shooter game",
-    url: "https://shellshock.io/",
-    category: "Shooter"
-  },
-  {
-    title: "Krunker",
-    description: "Fast-paced FPS browser game",
-    url: "https://krunker.io/",
-    category: "Shooter"
-  },
-  {
-    title: "Wordle",
-    description: "Daily word guessing game",
-    url: "https://www.nytimes.com/games/wordle/index.html",
-    category: "Puzzle"
-  },
-  {
-    title: "Sudoku",
-    description: "Number placement puzzle",
-    url: "https://sudoku.com/",
-    category: "Puzzle"
-  },
-  {
-    title: "Chess.com",
-    description: "Online chess platform",
-    url: "https://chess.com/",
-    category: "Strategy"
-  },
-  {
-    title: "Checkers",
-    description: "Classic board game",
-    url: "https://cardgames.io/checkers/",
-    category: "Strategy"
-  },
-  {
-    title: "Backgammon",
-    description: "Ancient board game",
-    url: "https://cardgames.io/backgammon/",
-    category: "Strategy"
+    title: "UNO",
+    description: "Classic card game",
+    url: "https://now.gg/play/mattel163/2946/uno",
+    category: "Card"
   },
   {
     title: "Solitaire",
-    description: "Classic card game",
-    url: "https://solitaired.com/",
+    description: "Classic patience card game",
+    url: "https://now.gg/play/microsoft-corporation/1677/microsoft-solitaire-collection",
     category: "Card"
   },
+
+  // Arcade Games
   {
-    title: "Hearts",
-    description: "Trick-taking card game",
-    url: "https://cardgames.io/hearts/",
-    category: "Card"
+    title: "Pac-Man",
+    description: "Classic maze chase game",
+    url: "https://now.gg/play/bandai-namco/1819/pac-man",
+    category: "Arcade"
   },
   {
-    title: "Spades",
-    description: "Partnership card game",
-    url: "https://cardgames.io/spades/",
-    category: "Card"
+    title: "Fruit Ninja",
+    description: "Slice fruit with precision",
+    url: "https://now.gg/play/halfbrick-studios/1695/fruit-ninja",
+    category: "Arcade"
   },
   {
-    title: "Run 3",
-    description: "Endless running in space",
-    url: "https://www.coolmathgames.com/0-run-3",
-    category: "Action"
+    title: "Angry Birds",
+    description: "Physics-based puzzle game",
+    url: "https://now.gg/play/rovio-entertainment/1942/angry-birds-reloaded",
+    category: "Arcade"
   },
   {
-    title: "Happy Wheels",
-    description: "Physics-based obstacle course",
-    url: "https://totaljerkface.com/happy_wheels.tjf",
-    category: "Action"
-  },
-  {
-    title: "Bloons TD",
-    description: "Tower defense strategy",
-    url: "https://www.coolmathgames.com/0-bloons-tower-defense-4",
-    category: "Strategy"
-  },
-  {
-    title: "Cookie Clicker",
-    description: "Incremental clicking game",
-    url: "https://orteil.dashnet.org/cookieclicker/",
-    category: "Idle"
+    title: "Doodle Jump",
+    description: "Endless jumping adventure",
+    url: "https://now.gg/play/lima-sky/1819/doodle-jump",
+    category: "Arcade"
   }
 ];
 
@@ -219,7 +365,7 @@ const GamesGrid = ({ theme, onGameClick }: GamesGridProps) => {
           <h2 className={`text-3xl font-bold ${classes.title}`}>Game Center</h2>
         </div>
         <p className={classes.subtitle}>
-          Play your favorite unblocked games directly in your browser
+          Play your favorite games directly in your browser via now.gg
         </p>
       </div>
 

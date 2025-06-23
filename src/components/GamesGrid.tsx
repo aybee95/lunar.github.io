@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Gamepad2, Play } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
@@ -292,6 +291,98 @@ const games = [
     description: "Endless jumping adventure",
     url: "https://now.gg/play/lima-sky/1819/doodle-jump",
     category: "Arcade"
+  },
+
+  // Cool Math Games
+  {
+    title: "Run 3",
+    description: "Endless tunnel running game",
+    url: "https://www.coolmathgames.com/0-run-3",
+    category: "Arcade"
+  },
+  {
+    title: "Papa's Pizzeria",
+    description: "Pizza making time management",
+    url: "https://www.coolmathgames.com/0-papas-pizzeria",
+    category: "Simulation"
+  },
+  {
+    title: "Fireboy and Watergirl",
+    description: "Co-op puzzle platformer",
+    url: "https://www.coolmathgames.com/0-fireboy-and-watergirl-in-the-forest-temple",
+    category: "Puzzle"
+  },
+  {
+    title: "Bloons TD 6",
+    description: "Tower defense with balloons",
+    url: "https://www.coolmathgames.com/0-bloons-td-6",
+    category: "Strategy"
+  },
+  {
+    title: "Duck Life",
+    description: "Train your duck for races",
+    url: "https://www.coolmathgames.com/0-duck-life",
+    category: "Adventure"
+  },
+  {
+    title: "World's Hardest Game",
+    description: "Extremely challenging maze game",
+    url: "https://www.coolmathgames.com/0-worlds-hardest-game",
+    category: "Arcade"
+  },
+  {
+    title: "Moto X3M",
+    description: "Motorcycle stunt racing",
+    url: "https://www.coolmathgames.com/0-moto-x3m",
+    category: "Racing"
+  },
+  {
+    title: "Papa's Freezeria",
+    description: "Ice cream shop management",
+    url: "https://www.coolmathgames.com/0-papas-freezeria",
+    category: "Simulation"
+  },
+  {
+    title: "Chess",
+    description: "Classic strategy board game",
+    url: "https://www.coolmathgames.com/0-chess",
+    category: "Strategy"
+  },
+  {
+    title: "Snake",
+    description: "Classic snake growing game",
+    url: "https://www.coolmathgames.com/0-snake",
+    category: "Arcade"
+  },
+  {
+    title: "2048",
+    description: "Number sliding puzzle game",
+    url: "https://www.coolmathgames.com/0-2048",
+    category: "Puzzle"
+  },
+  {
+    title: "Tetris",
+    description: "Classic block puzzle game",
+    url: "https://www.coolmathgames.com/0-tetris",
+    category: "Puzzle"
+  },
+  {
+    title: "Getting Over It",
+    description: "Frustratingly difficult climbing game",
+    url: "https://www.coolmathgames.com/0-getting-over-it",
+    category: "Adventure"
+  },
+  {
+    title: "Happy Wheels",
+    description: "Physics-based obstacle course",
+    url: "https://www.coolmathgames.com/0-happy-wheels",
+    category: "Action"
+  },
+  {
+    title: "There Is No Game",
+    description: "Meta puzzle adventure",
+    url: "https://www.coolmathgames.com/0-there-is-no-game",
+    category: "Puzzle"
   }
 ];
 
@@ -365,7 +456,7 @@ const GamesGrid = ({ theme, onGameClick }: GamesGridProps) => {
           <h2 className={`text-3xl font-bold ${classes.title}`}>Game Center</h2>
         </div>
         <p className={classes.subtitle}>
-          Play your favorite games directly in your browser via now.gg
+          Play your favorite games directly in your browser via now.gg and Cool Math Games
         </p>
       </div>
 

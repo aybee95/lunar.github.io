@@ -22,6 +22,7 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [showStartup, setShowStartup] = useState(true);
   const [currentGame, setCurrentGame] = useState<{title: string, url: string} | null>(null);
+  const [panicUrl, setPanicUrl] = useState('https://google.com');
 
   useEffect(() => {
     // Show loading screen for 3 seconds after password is entered
@@ -33,6 +34,25 @@ const Index = () => {
       return () => clearTimeout(timer);
     }
   }, [showStartup]);
+
+  useEffect(() => {
+    // Load panic URL from localStorage
+    const savedPanicUrl = localStorage.getItem('panicUrl');
+    if (savedPanicUrl) {
+      setPanicUrl(savedPanicUrl);
+    }
+
+    // Add keyboard shortcut for panic (Ctrl+Shift+P)
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.ctrlKey && event.shiftKey && event.key === 'P') {
+        event.preventDefault();
+        window.open(panicUrl, '_blank');
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [panicUrl]);
 
   const handleStartupSuccess = () => {
     setShowStartup(false);
@@ -57,6 +77,11 @@ const Index = () => {
 
   const handleBackFromGame = () => {
     setCurrentGame(null);
+  };
+
+  const handlePanicUrlChange = (url: string) => {
+    setPanicUrl(url);
+    localStorage.setItem('panicUrl', url);
   };
 
   const getWelcomeThemeClasses = () => {
@@ -200,13 +225,15 @@ const Index = () => {
       <BackgroundMusic theme={theme} />
       
       <div className="relative z-10 flex flex-col min-h-screen">
-        <Header theme={theme} onLogoClick={handleLogoClick} />
+        <Header theme={theme} onLogoClick={handleLogoClick} panicUrl={panicUrl} />
         
         <SettingsBar 
           theme={theme} 
           onThemeChange={setTheme}
           isOpen={showSettings}
           onToggle={() => setShowSettings(!showSettings)}
+          panicUrl={panicUrl}
+          onPanicUrlChange={handlePanicUrlChange}
         />
         
         <main className="flex-grow flex flex-col items-center justify-start px-4">

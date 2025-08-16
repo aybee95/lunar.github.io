@@ -1,7 +1,8 @@
 
 import { Button } from "@/components/ui/button";
-import { Settings, X, Eye, EyeOff, Volume2, VolumeX, Zap, Shield } from "lucide-react";
+import { Settings, X, Eye, EyeOff, Volume2, VolumeX, Zap, Shield, AlertTriangle } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
+import { Input } from "@/components/ui/input";
 import { useState } from "react";
 
 interface SettingsBarProps {
@@ -9,9 +10,11 @@ interface SettingsBarProps {
   onThemeChange: (theme: string) => void;
   isOpen: boolean;
   onToggle: () => void;
+  panicUrl: string;
+  onPanicUrlChange: (url: string) => void;
 }
 
-const SettingsBar = ({ theme, onThemeChange, isOpen, onToggle }: SettingsBarProps) => {
+const SettingsBar = ({ theme, onThemeChange, isOpen, onToggle, panicUrl, onPanicUrlChange }: SettingsBarProps) => {
   const [animations, setAnimations] = useState(true);
   const [sounds, setSounds] = useState(false);
   const [notifications, setNotifications] = useState(true);
@@ -160,6 +163,25 @@ const SettingsBar = ({ theme, onThemeChange, isOpen, onToggle }: SettingsBarProp
                     <p className={`${classes.accent} text-sm`}>Clear browsing data</p>
                   </div>
                   <Switch checked={privacy} onCheckedChange={setPrivacy} />
+                </div>
+              </div>
+            </div>
+
+            <div className={`border-t ${classes.divider} pt-6`}>
+              <h4 className={`text-lg font-semibold ${classes.text} mb-4 flex items-center gap-2`}>
+                <AlertTriangle size={18} />
+                Panic Settings
+              </h4>
+              <div className="space-y-4">
+                <div>
+                  <p className={`${classes.text} font-medium mb-2`}>Panic URL</p>
+                  <p className={`${classes.accent} text-sm mb-3`}>Website to open when panic button is pressed (Ctrl+Shift+P)</p>
+                  <Input
+                    value={panicUrl}
+                    onChange={(e) => onPanicUrlChange(e.target.value)}
+                    placeholder="https://google.com"
+                    className={`${classes.button} bg-transparent`}
+                  />
                 </div>
               </div>
             </div>

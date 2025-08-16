@@ -12,7 +12,12 @@ import LoadingScreen from "@/components/LoadingScreen";
 import StartupScreen from "@/components/StartupScreen";
 import GamePage from "@/components/GamePage";
 import BackgroundMusic from "@/components/BackgroundMusic";
-import { Globe, Gamepad2, Film } from "lucide-react";
+import { AppSidebar } from "@/components/AppSidebar";
+import { AlertBanner } from "@/components/AlertBanner";
+import { AnnouncementsModal } from "@/components/AnnouncementsModal";
+import { ToolsModal } from "@/components/ToolsModal";
+import { Globe, Gamepad2, Film, Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('');
@@ -23,6 +28,10 @@ const Index = () => {
   const [showStartup, setShowStartup] = useState(true);
   const [currentGame, setCurrentGame] = useState<{title: string, url: string} | null>(null);
   const [panicUrl, setPanicUrl] = useState('https://google.com');
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [showAnnouncements, setShowAnnouncements] = useState(false);
+  const [showTools, setShowTools] = useState(false);
+  const [showAlert, setShowAlert] = useState(true);
 
   useEffect(() => {
     // Show loading screen for 3 seconds after password is entered
@@ -220,12 +229,43 @@ const Index = () => {
   }
 
   return (
-    <div className={`min-h-screen ${theme === 'cosmic' ? 'bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900' : theme === 'dark' ? 'bg-gradient-to-br from-gray-900 to-black' : 'bg-gradient-to-br from-gray-100 to-white'} flex flex-col relative overflow-hidden`}>
+    <div className={`min-h-screen ${theme === 'cosmic' ? 'bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900' : theme === 'dark' ? 'bg-gradient-to-br from-gray-900 to-black' : 'bg-gradient-to-br from-gray-100 to-white'} flex relative overflow-hidden`}>
       <StarField theme={theme} />
       <BackgroundMusic theme={theme} />
       
-      <div className="relative z-10 flex flex-col min-h-screen">
+      {/* Sidebar */}
+      <AppSidebar
+        theme={theme}
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
+        onAnnouncementsOpen={() => setShowAnnouncements(true)}
+        onToolsOpen={() => setShowTools(true)}
+        collapsed={sidebarCollapsed}
+      />
+
+      {/* Main Content */}
+      <div className="relative z-10 flex flex-col min-h-screen flex-1">
+        {/* Alert Banner */}
+        {showAlert && (
+          <AlertBanner
+            theme={theme}
+            type="info"
+            title="Welcome to Lunar Proxy v2.1"
+            message="New features: Enhanced sidebar navigation, tools section, and announcements system!"
+            onDismiss={() => setShowAlert(false)}
+          />
+        )}
+
         <Header theme={theme} onLogoClick={handleLogoClick} panicUrl={panicUrl} />
+        
+        {/* Sidebar Toggle Button */}
+        <Button
+          onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+          className="fixed top-4 left-4 z-50 bg-black/20 hover:bg-black/40 text-white border border-white/20"
+          size="sm"
+        >
+          {sidebarCollapsed ? <Menu size={16} /> : <X size={16} />}
+        </Button>
         
         <SettingsBar 
           theme={theme} 
@@ -248,6 +288,19 @@ const Index = () => {
         
         <Footer theme={theme} />
       </div>
+
+      {/* Modals */}
+      <AnnouncementsModal
+        theme={theme}
+        isOpen={showAnnouncements}
+        onClose={() => setShowAnnouncements(false)}
+      />
+      
+      <ToolsModal
+        theme={theme}
+        isOpen={showTools}
+        onClose={() => setShowTools(false)}
+      />
     </div>
   );
 };

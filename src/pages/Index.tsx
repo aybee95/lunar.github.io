@@ -150,44 +150,19 @@ const Index = () => {
       const classes = getWelcomeThemeClasses();
       return (
         <div className="w-full flex flex-col items-center justify-center min-h-[500px] space-y-12 px-4">
-          <div className="text-center space-y-6">
-            <h1 className={`text-6xl font-bold ${classes.title} drop-shadow-lg`}>
-              WELCOME
+          <div className="text-center space-y-8">
+            <h1 className={`text-7xl font-bold ${classes.title} drop-shadow-2xl tracking-wide`}>
+              Welcome to <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">Lunar-X</span>
             </h1>
-            <p className={`text-2xl ${classes.subtitle} font-medium`}>
-              Choose what you'd like to explore
+            <p className={`text-3xl ${classes.subtitle} font-light tracking-wide opacity-90`}>
+              Explore the Web Beyond the Stars
             </p>
-          </div>
-          
-          <div className="max-w-6xl w-full">
-            <div className="flex justify-center gap-8 flex-wrap">
-              <div
-                onClick={() => setActiveTab('proxy')}
-                className={`${classes.card} ${classes.glow} rounded-2xl border-2 p-10 cursor-pointer transition-all duration-300 hover:scale-105 text-center w-80 group`}
-              >
-                <Globe size={64} className={`${classes.icon} mb-6 mx-auto group-hover:scale-110 transition-transform duration-300`} />
-                <h3 className={`text-2xl font-bold ${classes.title} mb-3`}>Proxy</h3>
-                <p className={`${classes.subtitle} text-lg leading-relaxed`}>Access any website through our secure proxy service</p>
-              </div>
-
-              <div
-                onClick={() => setActiveTab('games')}
-                className={`${classes.card} ${classes.glow} rounded-2xl border-2 p-10 cursor-pointer transition-all duration-300 hover:scale-105 text-center w-80 group`}
-              >
-                <Gamepad2 size={64} className={`${classes.icon} mb-6 mx-auto group-hover:scale-110 transition-transform duration-300`} />
-                <h3 className={`text-2xl font-bold ${classes.title} mb-3`}>Games</h3>
-                <p className={`${classes.subtitle} text-lg leading-relaxed`}>Enjoy your favorite unblocked games</p>
-              </div>
-
-              <div
-                onClick={() => setActiveTab('movies')}
-                className={`${classes.card} ${classes.glow} rounded-2xl border-2 p-10 cursor-pointer transition-all duration-300 hover:scale-105 text-center w-80 group`}
-              >
-                <Film size={64} className={`${classes.icon} mb-6 mx-auto group-hover:scale-110 transition-transform duration-300`} />
-                <h3 className={`text-2xl font-bold ${classes.title} mb-3`}>Movies</h3>
-                <p className={`${classes.subtitle} text-lg leading-relaxed`}>Watch movies and TV shows</p>
-              </div>
-            </div>
+            <Button
+              onClick={() => setActiveTab('proxy')}
+              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white text-xl px-12 py-4 rounded-full border-2 border-purple-400/50 hover:border-purple-300/70 shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 hover:scale-105 backdrop-blur-sm"
+            >
+              Get Started
+            </Button>
           </div>
         </div>
       );
@@ -250,8 +225,8 @@ const Index = () => {
           <AlertBanner
             theme={theme}
             type="info"
-            title="Welcome to Lunar Proxy v2.1"
-            message="New features: Enhanced sidebar navigation, tools section, and announcements system!"
+            title="Welcome to Lunar-X v3.0"
+            message="Experience enhanced navigation, powerful tools, and seamless browsing beyond the stars!"
             onDismiss={() => setShowAlert(false)}
           />
         )}

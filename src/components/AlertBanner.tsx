@@ -67,8 +67,8 @@ export function AlertBanner({
   return (
     <div className={`
       ${getThemeClasses()}
-      border backdrop-blur-md px-4 py-3 flex items-center gap-3 w-full
-      animate-fade-in
+      border-0 backdrop-blur-md px-6 py-4 flex items-center gap-4 w-full
+      animate-fade-in font-medium
     `}>
       <Icon size={20} className="flex-shrink-0" />
       <div className="flex-1">

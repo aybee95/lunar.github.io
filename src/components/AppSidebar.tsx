@@ -66,7 +66,7 @@ export function AppSidebar({ theme, activeTab, onTabChange, onAnnouncementsOpen,
 
   return (
     <div
-      className={`${collapsed ? "w-16" : "w-64"} ${classes.sidebar} backdrop-blur-md border-r transition-all duration-300 flex flex-col`}
+      className={`${collapsed ? "w-16" : "w-64"} ${classes.sidebar} backdrop-blur-md border-r-0 transition-all duration-300 flex flex-col shadow-2xl`}
     >
       <div className="p-2">
         {/* Main Navigation */}

@@ -11,7 +11,7 @@ import EmbeddedBrowser from "@/components/EmbeddedBrowser";
 import LoadingScreen from "@/components/LoadingScreen";
 import StartupScreen from "@/components/StartupScreen";
 import GamePage from "@/components/GamePage";
-import BackgroundMusic from "@/components/BackgroundMusic";
+
 import { AppSidebar } from "@/components/AppSidebar";
 import { AlertBanner } from "@/components/AlertBanner";
 import { AnnouncementsModal } from "@/components/AnnouncementsModal";
@@ -152,7 +152,7 @@ const Index = () => {
         <div className="w-full flex flex-col items-center justify-center min-h-[500px] space-y-12 px-4">
           <div className="text-center space-y-8">
             <h1 className={`text-7xl font-bold ${classes.title} drop-shadow-2xl tracking-wide`}>
-              Welcome to <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">Lunar-X</span>
+              Welcome to <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">Lunar Proxy</span>
             </h1>
             <p className={`text-3xl ${classes.subtitle} font-light tracking-wide opacity-90`}>
               Explore the Web Beyond the Stars
@@ -206,7 +206,6 @@ const Index = () => {
   return (
     <div className={`min-h-screen ${theme === 'cosmic' ? 'bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900' : theme === 'dark' ? 'bg-gradient-to-br from-gray-900 to-black' : 'bg-gradient-to-br from-gray-100 to-white'} flex relative overflow-hidden`}>
       <StarField theme={theme} />
-      <BackgroundMusic theme={theme} />
       
       {/* Sidebar */}
       <AppSidebar
@@ -225,7 +224,7 @@ const Index = () => {
           <AlertBanner
             theme={theme}
             type="info"
-            title="Welcome to Lunar-X v3.0"
+            title="Welcome to Lunar Proxy v3.0"
             message="Experience enhanced navigation, powerful tools, and seamless browsing beyond the stars!"
             onDismiss={() => setShowAlert(false)}
           />

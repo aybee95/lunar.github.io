@@ -25,15 +25,15 @@ export function AppSidebar({ theme, activeTab, onTabChange, onAnnouncementsOpen,
   ];
 
   const linkItems = [
-    { title: "Discord", url: "https://discord.gg/example", icon: MessageCircle },
-    { title: "GitHub", url: "https://github.com", icon: Github },
+    { title: "Discord", url: "https://discord.gg/lunarproxy", icon: MessageCircle },
+    { title: "GitHub", url: "https://github.com/lunarproxy/lunar-proxy", icon: Github },
   ];
 
   const getThemeClasses = () => {
     switch (theme) {
       case 'cosmic':
         return {
-          sidebar: 'bg-slate-900/95 border-blue-500/30',
+          sidebar: 'bg-slate-900/20 border-blue-500/20',
           active: 'bg-blue-600/80 text-blue-100 border-blue-400/50',
           inactive: 'text-blue-200/80 hover:bg-blue-800/50 hover:text-blue-100',
           label: 'text-blue-300/90'
